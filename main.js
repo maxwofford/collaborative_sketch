@@ -2,7 +2,7 @@ var config = {
   apiKey: "AIzaSyDHwT5HluYshbKOdgoH7hkhW3MBmWrTiRE",
   authDomain: "collabsketch-3efc5.firebaseapp.com",
   databaseURL: "https://collabsketch-3efc5.firebaseio.com",
-  storageBucket: ""
+  storageBucket: "collabsketch-3efc5.appspot.com",
 };
 firebase.initializeApp(config);
 
