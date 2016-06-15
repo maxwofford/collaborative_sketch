@@ -13,6 +13,9 @@ function setup() {
   var canvas = createCanvas(400, 400);
   background(255);
   fill(0);
+  pointsData.on("child_removed", function () {
+    points = [];
+  });
   pointsData.on("child_added", function (point) {
     points.push(point.val());
   });
