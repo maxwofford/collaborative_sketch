@@ -1,4 +1,5 @@
 var toolType = 'dot';
+var widthSlider;
 
 var config = {
   apiKey: "AIzaSyDHwT5HluYshbKOdgoH7hkhW3MBmWrTiRE",
@@ -15,6 +16,10 @@ function setup() {
   var canvas = createCanvas(400, 400);
   background(255);
   fill(0);
+
+  widthSlider = createSlider(1, 10, 3);
+  widthSlider.position(20, 40);
+
   pointsData.on("child_removed", function () {
     points = [];
   });
@@ -37,9 +42,10 @@ function draw() {
   for (var i = 0; i < points.length; i++) {
     var point = points[i];
     if (point.type == "dot") {
-      ellipse(point.x, point.y, 5, 5);
+      ellipse(point.x, point.y, point.width, point.width);
     } else if (i > 0 && point.type == "line" && points[i - 1].type == "line") {
       var previous = points[i - 1];
+      strokeWeight(point.width);
       line(point.x, point.y, previous.x, previous.y);
     }
   }
@@ -56,7 +62,10 @@ function keyPressed() {
 }
 
 function drawPoint() {
-  pointsData.push({type: toolType, x: mouseX, y: mouseY});
+  pointsData.push({type: toolType,
+                   x: mouseX,
+                   y: mouseY,
+                   width: widthSlider.value()});
 }
 
 $("#saveDrawing").on("click", saveDrawing);
