@@ -1,3 +1,5 @@
+var toolType = 'dot';
+
 var config = {
   apiKey: "AIzaSyDHwT5HluYshbKOdgoH7hkhW3MBmWrTiRE",
   authDomain: "collabsketch-3efc5.firebaseapp.com",
@@ -20,6 +22,9 @@ function setup() {
     points.push(point.val());
   });
   canvas.mousePressed(drawPoint);
+  canvas.mouseReleased(function () {
+    pointsData.push({type: "release"});
+  });
   canvas.mouseMoved(function () {
     if (mouseIsPressed) {
       drawPoint();
@@ -31,12 +36,27 @@ function draw() {
   background(255);
   for (var i = 0; i < points.length; i++) {
     var point = points[i];
-    ellipse(point.x, point.y, 5, 5);
+    if (point.type == "dot") {
+      ellipse(point.x, point.y, 5, 5);
+    } else if (i > 0 && point.type == "line" && points[i - 1].type == "line") {
+      var previous = points[i - 1];
+      line(point.x, point.y, previous.x, previous.y);
+    }
+  }
+}
+
+function keyPressed() {
+  if (keyCode == "72") {
+    help();
+  } else if (keyCode == "68") {
+    toolType = "dot";
+  } else if (keyCode == "76") {
+    toolType = "line";
   }
 }
 
 function drawPoint() {
-  pointsData.push({x: mouseX, y: mouseY});
+  pointsData.push({type: toolType, x: mouseX, y: mouseY});
 }
 
 $("#saveDrawing").on("click", saveDrawing);
