@@ -42,7 +42,7 @@ function drawPoint() {
 $("#saveDrawing").on("click", saveDrawing);
 
 function saveDrawing() {
-  saveCanvas("Painter Orpheus");
+  saveCanvas(window.prompt("Save as", "Painter Orpheus"));
 }
 
 $("#clearDrawing").on("click", clearDrawing);
