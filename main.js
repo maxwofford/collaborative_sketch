@@ -51,3 +51,12 @@ function clearDrawing() {
   pointsData.remove();
   points = [];
 }
+
+$("#help").on("click", help);
+
+function help() {
+  alert("The following commands are implemented:\n\n" +
+        "h - help\n" +
+        "d - dot drawing tool\n" +
+        "l - line drawing tool");
+}
