@@ -1,5 +1,6 @@
 var toolType = 'dot';
 var widthSlider;
+var colorInput = document.querySelector('#color');
 
 var config = {
   apiKey: "AIzaSyDHwT5HluYshbKOdgoH7hkhW3MBmWrTiRE",
@@ -41,10 +42,13 @@ function draw() {
   background(255);
   for (var i = 0; i < points.length; i++) {
     var point = points[i];
+    fill(point.color || '#000000')
     if (point.type == "dot") {
+      strokeWeight(0);
       ellipse(point.x, point.y, point.width, point.width);
     } else if (i > 0 && point.type == "line" && points[i - 1].type == "line") {
       var previous = points[i - 1];
+      stroke(point.color || '#000000')
       strokeWeight(point.width);
       line(point.x, point.y, previous.x, previous.y);
     }
@@ -65,6 +69,7 @@ function drawPoint() {
   pointsData.push({type: toolType,
                    x: mouseX,
                    y: mouseY,
+                   color: colorInput.value,
                    width: widthSlider.value()});
 }
 
