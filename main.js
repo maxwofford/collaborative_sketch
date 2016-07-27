@@ -13,7 +13,7 @@ var pointsData = firebase.database().ref();
 var points = [];
 
 function setup() {
-  var canvas = createCanvas(400, 400);
+  var canvas = createCanvas(windowWidth, windowHeight);
   background(255);
   fill(0);
 
